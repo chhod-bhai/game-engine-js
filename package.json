@@ -1,0 +1,23 @@
+{
+  "name": "game-engine",
+  "version": "1.0.0",
+  "description": "Simple game engine for my 2d game",
+  "main": "main.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chhod-bhai/game-engine-js.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/chhod-bhai/game-engine-js/issues"
+  },
+  "homepage": "https://github.com/chhod-bhai/game-engine-js#readme",
+  "devDependencies": {
+    "typescript": "^5.9.3"
+  }
+}

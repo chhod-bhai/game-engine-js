@@ -1,9 +1,10 @@
+"use strict";
 const fixedDeltaTime = 1 / 25;
 let accumulator = 0;
 let lastTime = performance.now();
 let gameEnded = false;
 
-const cnv = document.getElementById("game-screen");
+const cnv = document.getElementById("game-screen") as HTMLCanvasElement;
 const ctx = cnv.getContext("2d");
 
 const circleState = {
@@ -15,7 +16,7 @@ const circleState = {
   velocity: 100,
 };
 
-const updateGame = function (fixedDeltaTime) {
+const updateGame = function (fixedDeltaTime: number) {
   // when circle reaches the end of canvas , game is over, we need to return
   if (circleState.currentX >= cnv.width - 10) {
     gameEnded = true;
@@ -27,27 +28,29 @@ const updateGame = function (fixedDeltaTime) {
   circleState.currentX += circleState.velocity * fixedDeltaTime;
 };
 
-const render = function (interpolation) {
+const render = function (interpolation: number) {
   // clear the screen and paint the circle at the updated location
   // use interpolation for smoother transitions
-  ctx.clearRect(0, 0, cnv.width, cnv.height);
-  ctx.beginPath();
-  ctx.arc(
-    circleState.currentX +
-      (circleState.currentX - circleState.prevX) * interpolation,
-    circleState.currentY,
-    circleState.radius,
-    0,
-    2 * Math.PI
-  );
-  ctx.fillStyle = "red";
-  ctx.fill();
+  if (ctx) {
+    ctx.clearRect(0, 0, cnv.width, cnv.height);
+    ctx.beginPath();
+    ctx.arc(
+      circleState.currentX +
+        (circleState.currentX - circleState.prevX) * interpolation,
+      circleState.currentY,
+      circleState.radius,
+      0,
+      2 * Math.PI
+    );
+    ctx.fillStyle = "red";
+    ctx.fill();
+  }
 };
 
-const gameLoop = function (currentTime) {
+const gameLoop: FrameRequestCallback = function (currentTime) {
   if (gameEnded) return;
 
-  const deltaTimeSecs = (currentTime - lastTime) / 1000;
+  let deltaTimeSecs = (currentTime - lastTime) / 1000;
   lastTime = currentTime;
   accumulator += deltaTimeSecs;
 
