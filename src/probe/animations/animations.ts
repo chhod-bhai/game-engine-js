@@ -106,6 +106,9 @@ const gameLoop = () => {
     frameCnt++;
     renderedAnimationFrames =
       Math.floor(frameCnt / staggerFrames) % totalAnimationFrames;
+    if (frameCnt > staggerFrames * totalAnimationFrames) {
+      frameCnt = 0;
+    }
   }
 
   requestAnimationFrame(gameLoop);
